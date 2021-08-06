@@ -1,13 +1,13 @@
 let amqp = require('amqplib/callback_api');
-amqp.connect('ampa://localhost', function(error, connection) {
+amqp.connect('amqp://localhost', function(error, connection) {
     if (error)
         throw error;
-    connection.createChannerl(function(eror1,channel){
+    connection.createChannel(function(eror1,channel){
         if(eror1)
             throw error1;
         let queue = 'hello';
         let msg = 'world';
-        channel.sendToQueue(queue, {
+        channel.assertQueue(queue, {
             durable: false
         });
         channel.sendToQueue(queue, Buffer.from(msg));
